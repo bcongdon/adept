@@ -123,9 +123,6 @@ class PlayerCharacter(Character):
         self.pos  = int(self.fPos[0]), int(self.fPos[1])
         self.xv, self.yv = 0.0, 0.0
 
-        if self.xv is not 0 or self.xy is not 0:
-            SoundEngine.playSoundEffect("footstep.wav")
-
         if not self.moving_up and w and not(a or s or d):
             self.moving_up = True
             self.moving_down = False
@@ -173,6 +170,11 @@ class PlayerCharacter(Character):
             self.blit_sprite()
 
         self.sprite_counter += utils.delta
+
+        if self.moving_left or self.moving_right or self.moving_down or self.moving_up:
+            SoundEngine.startLoopedSoundEffect("footstep2.wav")
+        else:
+            SoundEngine.stopLoopedSoundEffect("footstep2.wav")
 
         if self.sprite_counter > self.animation_delta:
             self.sprite_counter = 0
