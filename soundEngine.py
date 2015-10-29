@@ -25,4 +25,16 @@ class SoundEngine:
     def stopAllSounds():
         pygame.mixer.stop()
 
+    @staticmethod
+    def playSoundEffect(title):
+        SOUND_FILE = os.path.join(os.path.join(*list(['assets', 'sounds'] + [title])))
+        channelToPlay = pygame.mixer.find_channel()
+        if channelToPlay is not None:
+            try:
+                channelToPlay.play(pygame.mixer.Sound(file=SOUND_FILE))
+            except Exception as e:
+                print e
+        else:
+            print "Error: Could not find channel to play sound effect on."
+
         

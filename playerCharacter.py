@@ -14,6 +14,8 @@ from inventory import Inventory
 from skill import Skill
 from subMap import SubMap
 
+from soundEngine import SoundEngine
+
 class PlayerCharacter(Character):
 
     DEFAULT_NAME  = "Unnamed PlayerCharacter"
@@ -120,6 +122,9 @@ class PlayerCharacter(Character):
         self.fPos = x, y
         self.pos  = int(self.fPos[0]), int(self.fPos[1])
         self.xv, self.yv = 0.0, 0.0
+
+        if self.xv is not 0 or self.xy is not 0:
+            SoundEngine.playSoundEffect("footstep.wav")
 
         if not self.moving_up and w and not(a or s or d):
             self.moving_up = True
