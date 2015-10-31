@@ -31,31 +31,25 @@ class Options(Scene):
                 func=self.go_to_main_menu,
             )
         )
-        self.buttons.add(
-            Button(
-                (utils.SCREEN_W / 2 - 10, utils.SCREEN_H/2 - 10),
+        self.musicButton = Button(
+                (utils.SCREEN_W / 2 - 10, utils.SCREEN_H/2 + 50),
                 "Mute Music",
                 invert_y_pos=True,
-                func=self.mute_music,
+                func=self.toggleMusic,
             )
-        )
         self.buttons.add(
-            Button(
-                (utils.SCREEN_W / 2 - 10, utils.SCREEN_H/2 + 50),
-                "Play Music",
-                invert_y_pos=True,
-                func=self.play_music,
-            )
+            self.musicButton
         )
 
     def go_to_main_menu(self):
         utils.set_scene(
             Menu()
         )
-    def mute_music(self):
-        SoundEngine.setMusicVolume(0)
-    def play_music(self):
-        SoundEngine.setMusicVolume(1)
-
+    def toggleMusic(self):
+        if SoundEngine.toggleMusicMute():
+            self.musicButton.text = "Play Music"
+        else:
+            self.musicButton.text = "Mute Music"
+        super(Options, self).render()
 
 from menu import Menu

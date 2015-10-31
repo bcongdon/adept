@@ -5,11 +5,14 @@ class SoundEngine:
     pygame.mixer.init()
     MUSIC_CHANNEL = pygame.mixer.find_channel()
     PLAYING_SOUND_EFFECTS = dict()
+    MUSIC_VOLUME = 0.2
+    MUSIC_MUTED = False
 
     @staticmethod
     def playMusic(title, numLoops=-1):
         SOUND_FILE = os.path.join(os.path.join(*list(['assets', 'sounds', 'music'] + [title])))
-        print SOUND_FILE
+        if not SoundEngine.MUSIC_MUTED:
+            SoundEngine.MUSIC_CHANNEL.set_volume(SoundEngine.MUSIC_VOLUME)
         try:
             musicSound = pygame.mixer.Sound(file=SOUND_FILE)
             if musicSound is not None:
@@ -19,8 +22,14 @@ class SoundEngine:
             print(e)
 
     @staticmethod
-    def setMusicVolume(vol):
-        SoundEngine.MUSIC_CHANNEL.set_volume(vol)
+    def toggleMusicMute():
+        if SoundEngine.MUSIC_MUTED: 
+            SoundEngine.MUSIC_CHANNEL.set_volume(SoundEngine.MUSIC_VOLUME)
+            SoundEngine.MUSIC_MUTED = False
+        else:
+            SoundEngine.MUSIC_CHANNEL.set_volume(0)
+            SoundEngine.MUSIC_MUTED = True
+        return SoundEngine.MUSIC_MUTED
 
     @staticmethod
     def stopAllSounds():
