@@ -32,6 +32,8 @@ from trader import Trader
 from eventRegistry import EventRegistry
 from inventoryUtils import InventoryUtils
 
+import random
+
 class GameTestScene(Scene):
     def __init__(self, pc_name): 
         Scene.__init__(self)
@@ -41,6 +43,8 @@ class GameTestScene(Scene):
         self.friendly = Friendly(name="villager", fPos=(650.0,650.0))
         self.trader = Trader(name="merchant", fPos=(800.0,800.0))
         self.npcs = [self.enemy, self.friendly, self.trader]
+        for x in range(100):
+            self.npcs.append(Enemy(name="monster", fPos=(600.0+random.randrange(1000),600.0+random.randrange(1000))))
         self.pc = Saves.unstore(pc_name, "characters")
 
         if self.pc is None:
