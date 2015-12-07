@@ -41,10 +41,10 @@ class GameTestScene(Scene):
         PluginManager.loadPlugins()
         self.enemy = Enemy(name="monster", fPos=(600.0,600.0))
         self.friendly = Friendly(name="villager", fPos=(650.0,650.0))
-        self.trader = Trader(name="merchant", fPos=(800.0,800.0))
-        self.npcs = [self.enemy, self.friendly, self.trader]
-        for x in range(100):
-            self.npcs.append(Enemy(name="monster", fPos=(600.0+random.randrange(1000),600.0+random.randrange(1000))))
+        self.trader = Trader(name="merchant", fPos=(8000.0,8000.0))
+        self.npcs = []#[self.enemy, self.friendly, self.trader]
+        # for x in range(100):
+        #     self.npcs.append(Enemy(name="monster", fPos=(600.0+random.randrange(1000),600.0+random.randrange(1000))))
         self.pc = Saves.unstore(pc_name, "characters")
 
         if self.pc is None:
@@ -57,8 +57,7 @@ class GameTestScene(Scene):
         hb = HotbarUI(self.pc.inventory, self.UIManager)
         self.UIManager.guiScreens.append(hb)
         self.UIManager.alwaysOnGUIs.append(hb)
-        self.pc.inventory.addItem(Item("dagger",quantity=5))
-        self.pc.inventory.addItem(Item("book",quantity=5))
+        self.pc.inventory.addItem(Item("potion",quantity=1))
         self.UIManager.updateGUIs()
 
 

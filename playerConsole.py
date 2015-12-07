@@ -17,8 +17,8 @@ class PlayerConsole:
         if hasattr(PlayerConsole, 'tray'):
             return
         PlayerConsole.tray = Tray(
-            (10,utils.SCREEN_H - utils.SCREEN_H / 4 - 75),
-            (utils.SCREEN_W / 2, utils.SCREEN_H / 4),
+            (10,utils.SCREEN_H - utils.SCREEN_H / 4 - 25),
+            (utils.SCREEN_W / 2, utils.SCREEN_H / 4 - 50),
             color=(100,100,100,240))
         # PlayerConsole.registerNewEvent("Hello!")
         # PlayerConsole.registerNewEvent("Hello!")
