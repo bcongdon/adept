@@ -2,6 +2,7 @@ import pygame
 import os
 from buffalo import utils
 from item import Item
+from playerConsole import PlayerConsole
 
 # User interface for trading with NPCs
 # Similar to the crafting UI, with some minor differences
@@ -19,7 +20,7 @@ class TradingUI:
 		self.inventory = inventory
 		self.surface = utils.empty_surface((228,500))
 		self.surface.fill((100,100,100,100))
-		self.pos = (utils.SCREEN_W / 2 + self.surface.get_width() / 2 + 350, utils.SCREEN_H / 2 - 150)
+		self.pos = (utils.SCREEN_W / 2 + self.surface.get_width() / 2 + 150, utils.SCREEN_H / 2 - 150)
 		self.tileRects = list()
 		self.tileTrades = list()
 		self.updateTradeTable()
@@ -94,6 +95,7 @@ class TradingUI:
 				 	newItem = Item(item)
 				 	newItem.quantity = clickedTrade.goods[item]
 				 	self.inventory.addItem(newItem)
+				 	PlayerConsole.registerNewEvent("You traded for 1 axe!")
 				 self.inventory.update()
 				 self.updateTradeTable()
 				 return
